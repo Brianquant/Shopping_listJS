@@ -1,0 +1,26 @@
+section {
+  padding: 4em;
+}
+
+.divider {
+  border: 1px solid #ced4da;
+  margin-top: 2em;
+}
+
+.filter-form {
+  margin: 1.5em 0 1em 0;
+}
+
+.collection {
+  margin-top: 2em;
+}
+
+.collection h3 {
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
+.clear-field {
+  margin-top: 3em;
+}
+/*# sourceMappingURL=style.css.map */
