@@ -20,6 +20,8 @@ function loadEventListerners() {
     form.addEventListener('submit', addQuant);
     // add brand
     form.addEventListener('submit', addBrand);
+    // remove item
+    itemList.addEventListener('click', removeItem);
 }
 
 // Add Item
@@ -72,16 +74,23 @@ function addItem(e) {
 
 }
 
+// Remove Item
+function removeItem(e) {
+    console.log(e.target.parentElement.parentElement.remove());
+}
+
+
+
 // Add Quantity
 function addQuant(e) {
     if (quantInput.value === '') {
-        alert('Place an item in!')
+        alert('Place a quantity in!')
     }
 
     // create li
     const li = document.createElement('li');
     // add class
-    li.className = 'list-group-item list-group-item-primary d-flex justify-content-around';
+    li.className = 'list-group-item list-group-item-info d-flex justify-content-around';
     // append to li & create text node 
     li.appendChild(document.createTextNode(quantInput.value));
     // create element a
@@ -126,13 +135,13 @@ function addQuant(e) {
 
 function addBrand(e) {
     if (brandInput.value === '') {
-        alert('Place an item in!')
+        alert('Place a Brand in!')
     }
 
     // create li
     const li = document.createElement('li');
     // add class
-    li.className = 'list-group-item list-group-item-primary d-flex justify-content-around';
+    li.className = 'list-group-item list-group-item-success d-flex justify-content-around';
     // append to li & create text node 
     li.appendChild(document.createTextNode(brandInput.value));
     // create element a
