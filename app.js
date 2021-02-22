@@ -22,6 +22,14 @@ function loadEventListerners() {
     form.addEventListener('submit', addBrand);
     // remove item
     itemList.addEventListener('click', removeItem);
+    // remove quant
+    quantList.addEventListener('click', removeQuantity);
+    // remove brand
+    brandList.addEventListener('click', removeBrand);
+    // remove all items
+    clearBtn.addEventListener('click', removeAll);
+    // filter items
+    filter.addEventListener('keyup', filterItems);
 }
 
 // Add Item
@@ -76,7 +84,7 @@ function addItem(e) {
 
 // Remove Item
 function removeItem(e) {
-    console.log(e.target.parentElement.parentElement.remove());
+    return e.target.parentElement.parentElement.remove();
 }
 
 
@@ -131,6 +139,11 @@ function addQuant(e) {
 
 }
 
+// remove Quantity
+function removeQuantity(e) {
+    return e.target.parentElement.parentElement.remove();
+}
+
 // Add Brand
 
 function addBrand(e) {
@@ -181,4 +194,37 @@ function addBrand(e) {
         e.preventDefault();
 
 }
+
+// remove brand
+
+function removeBrand(e) {
+    return e.target.parentElement.parentElement.remove();
+}
+
+// Remove all items
+function removeAll() {
+    while (itemList.firstChild && quantList.firstChild && brandList.firstChild) {
+        console.log(itemList.removeChild(itemList.firstChild) && quantList.removeChild(quantList.firstChild) && brandList.removeChild(brandList.firstChild));
+    }
+}
+
+// Filter items
+function filterItems(e) {
+    const text = e.target.value.toLowerCase();
+    console.log(text);
+
+
+}
+
+    // document.querySelectorAll('.list-group-item').forEach(function (items) {
+    //     const item = items.firstChild.textContent;
+    //     if (item.toLowerCase().indexOf(text) !== -1) {
+    //         items.style.display = 'block';
+    //     } else {
+    //         items.style.display = 'none';
+    //     }
+
+    // });
+
+
 
