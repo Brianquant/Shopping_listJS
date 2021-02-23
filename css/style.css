@@ -23,4 +23,13 @@ section {
 .clear-field {
   margin-top: 3em;
 }
+
+.item-metrics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
 /*# sourceMappingURL=style.css.map */

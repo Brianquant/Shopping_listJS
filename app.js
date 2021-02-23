@@ -17,63 +17,87 @@ function loadEventListerners() {
     // add item
     form.addEventListener('submit', addItem);
     // add quantity
-    form.addEventListener('submit', addQuant);
+    // form.addEventListener('submit', addQuant);
     // add brand
-    form.addEventListener('submit', addBrand);
+    // form.addEventListener('submit', addBrand);
     // remove item
     itemList.addEventListener('click', removeItem);
     // remove quant
-    quantList.addEventListener('click', removeQuantity);
+    // quantList.addEventListener('click', removeQuantity);
     // remove brand
-    brandList.addEventListener('click', removeBrand);
+    // brandList.addEventListener('click', removeBrand);
     // remove all items
     clearBtn.addEventListener('click', removeAll);
     // filter items
-    filter.addEventListener('keyup', filterItems);
+    // filter.addEventListener('keyup', filterItems);
 }
 
 // Add Item
 function addItem(e) {
-    if (itemInput.value === '') {
+    if (itemInput.value === '' && quantInput.value === '' && brandInput.value === '') {
         alert('Place an item in!')
     }
 
+
+    // create div
+    const div = document.createElement('div');
+    // create class
+    div.className = 'item';
     // create li
     const li = document.createElement('li');
     // add class
     li.className = 'list-group-item list-group-item-primary d-flex justify-content-around';
+    // append li to div
+    div.appendChild(li);
+    // create div for item
+    const divItem = document.createElement('div');
+    // append divItem to div
+    div.appendChild(divItem)
     // append to li & create text node 
-    li.appendChild(document.createTextNode(itemInput.value));
+    divItem.appendChild(document.createTextNode(itemInput.value));
+    // create div for quantity
+    const divQuant = document.createElement('div');
+    // append divItem to div
+    div.appendChild(divQuant)
+    // append to li & create text node 
+    divQuant.appendChild(document.createTextNode(quantInput.value));
+    // create div for brand
+    const divBrand = document.createElement('div');
+    // append divbrand to div
+    div.appendChild(divBrand)
+    // append to li & create text node 
+    divBrand.appendChild(document.createTextNode(brandInput.value));
+    console.log(div);
     // create element a
-    const linkEd = document.createElement('a');
+    // const linkEd = document.createElement('a');
     // add class
-    linkEd.className = 'edit';
+    // linkEd.className = 'edit';
     // add href
-    const attEd = document.createAttribute('href');
+    // const attEd = document.createAttribute('href');
     // add value
-    attEd.value = '#';
+    // attEd.value = '#';
     // apend att to link
-    linkEd.setAttributeNode(attEd);
+    // linkEd.setAttributeNode(attEd);
     // add icon
-    linkEd.innerHTML = '<i class="far fa-edit"></i>';
+    // linkEd.innerHTML = '<i class="far fa-edit"></i>';
     // append link to li
-    li.appendChild(linkEd);
+    // li.appendChild(linkEd);
     // create a element
-    const linkTra = document.createElement('a');
+    // const linkTra = document.createElement('a');
     // add class 
-    linkTra.className = 'delete';
+    // linkTra.className = 'delete';
     // add href
-    const attTra = document.createAttribute('href');
+    // const attTra = document.createAttribute('href');
     // add value
-    attTra.value = '#';
+    // attTra.value = '#';
     // apend att to link
-    linkTra.setAttributeNode(attTra);
+    // linkTra.setAttributeNode(attTra);
     // add icon
-    linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
+    // linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
     // append li
-    li.appendChild(linkTra);
+    // li.appendChild(linkTra);
     // append li to itemlist
-    itemList.appendChild(li);
+    // itemList.appendChild(li);
 
     // Clear input
     itemInput.value = '',
@@ -84,121 +108,129 @@ function addItem(e) {
 
 // Remove Item
 function removeItem(e) {
-    return e.target.parentElement.parentElement.remove();
+    if (e.target.parentElement.classList.contains('delete')) {
+        return e.target.parentElement.parentElement.remove();
+    }
+
 }
 
 
 
 // Add Quantity
-function addQuant(e) {
-    if (quantInput.value === '') {
-        alert('Place a quantity in!')
-    }
+// function addQuant(e) {
+//     if (quantInput.value === '') {
+//         alert('Place a quantity in!')
+//     }
 
-    // create li
-    const li = document.createElement('li');
-    // add class
-    li.className = 'list-group-item list-group-item-info d-flex justify-content-around';
-    // append to li & create text node 
-    li.appendChild(document.createTextNode(quantInput.value));
-    // create element a
-    const linkEd = document.createElement('a');
-    // add class
-    linkEd.className = 'edit';
-    // add href
-    const attEd = document.createAttribute('href');
-    // add value
-    attEd.value = '#';
-    // apend att to link
-    linkEd.setAttributeNode(attEd);
-    // add icon
-    linkEd.innerHTML = '<i class="far fa-edit"></i>';
-    // append link to li
-    li.appendChild(linkEd);
-    // create a element
-    const linkTra = document.createElement('a');
-    // add class 
-    linkTra.className = 'delete';
-    // add href
-    const attTra = document.createAttribute('href');
-    // add value
-    attTra.value = '#';
-    // apend att to link
-    linkTra.setAttributeNode(attTra);
-    // add icon
-    linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
-    // append li
-    li.appendChild(linkTra);
-    // append li to itemlist
-    quantList.appendChild(li);
+//     // create li
+//     const li = document.createElement('li');
+//     // add class
+//     li.className = 'list-group-item list-group-item-info d-flex justify-content-around';
+//     // append to li & create text node 
+//     li.appendChild(document.createTextNode(quantInput.value));
+//     // create element a
+//     const linkEd = document.createElement('a');
+//     // add class
+//     linkEd.className = 'edit';
+//     // add href
+//     const attEd = document.createAttribute('href');
+//     // add value
+//     attEd.value = '#';
+//     // apend att to link
+//     linkEd.setAttributeNode(attEd);
+//     // add icon
+//     linkEd.innerHTML = '<i class="far fa-edit"></i>';
+//     // append link to li
+//     li.appendChild(linkEd);
+//     // create a element
+//     const linkTra = document.createElement('a');
+//     // add class 
+//     linkTra.className = 'delete';
+//     // add href
+//     const attTra = document.createAttribute('href');
+//     // add value
+//     attTra.value = '#';
+//     // apend att to link
+//     linkTra.setAttributeNode(attTra);
+//     // add icon
+//     linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
+//     // append li
+//     li.appendChild(linkTra);
+//     // append li to itemlist
+//     quantList.appendChild(li);
 
-    // Clear input
-    quantInput.value = '',
+//     // Clear input
+//     quantInput.value = '',
 
-        e.preventDefault();
+//         e.preventDefault();
 
-}
+// }
 
 // remove Quantity
 function removeQuantity(e) {
-    return e.target.parentElement.parentElement.remove();
+    if (e.target.parentElement.classList.contains('delete')) {
+        return e.target.parentElement.parentElement.remove();
+    }
 }
 
 // Add Brand
 
-function addBrand(e) {
-    if (brandInput.value === '') {
-        alert('Place a Brand in!')
-    }
+// function addBrand(e) {
+//     if (brandInput.value === '') {
+//         alert('Place a Brand in!')
+//     }
 
-    // create li
-    const li = document.createElement('li');
-    // add class
-    li.className = 'list-group-item list-group-item-success d-flex justify-content-around';
-    // append to li & create text node 
-    li.appendChild(document.createTextNode(brandInput.value));
-    // create element a
-    const linkEd = document.createElement('a');
-    // add class
-    linkEd.className = 'edit';
-    // add href
-    const attEd = document.createAttribute('href');
-    // add value
-    attEd.value = '#';
-    // apend att to link
-    linkEd.setAttributeNode(attEd);
-    // add icon
-    linkEd.innerHTML = '<i class="far fa-edit"></i>';
-    // append link to li
-    li.appendChild(linkEd);
-    // create a element
-    const linkTra = document.createElement('a');
-    // add class 
-    linkTra.className = 'delete';
-    // add href
-    const attTra = document.createAttribute('href');
-    // add value
-    attTra.value = '#';
-    // apend att to link
-    linkTra.setAttributeNode(attTra);
-    // add icon
-    linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
-    // append li
-    li.appendChild(linkTra);
-    // append li to itemlist
-    brandList.appendChild(li);
+//     // create li
+//     const li = document.createElement('li');
+//     // add class
+//     li.className = 'list-group-item list-group-item-success d-flex justify-content-around';
+//     // append to li & create text node 
+//     li.appendChild(document.createTextNode(brandInput.value));
+//     // create element a
+//     const linkEd = document.createElement('a');
+//     // add class
+//     linkEd.className = 'edit';
+//     // add href
+//     const attEd = document.createAttribute('href');
+//     // add value
+//     attEd.value = '#';
+//     // apend att to link
+//     linkEd.setAttributeNode(attEd);
+//     // add icon
+//     linkEd.innerHTML = '<i class="far fa-edit"></i>';
+//     // append link to li
+//     li.appendChild(linkEd);
+//     // create a element
+//     const linkTra = document.createElement('a');
+//     // add class 
+//     linkTra.className = 'delete';
+//     // add href
+//     const attTra = document.createAttribute('href');
+//     // add value
+//     attTra.value = '#';
+//     // apend att to link
+//     linkTra.setAttributeNode(attTra);
+//     // add icon
+//     linkTra.innerHTML = '<i class="far fa-trash-alt"></i>';
+//     // append li
+//     li.appendChild(linkTra);
+//     // append li to itemlist
+//     brandList.appendChild(li);
 
-    // Clear input
-    brandInput.value = '',
+//     // Clear input
+//     brandInput.value = '',
 
-        e.preventDefault();
+//         e.preventDefault();
 
-}
+// }
 
 // remove brand
 
 function removeBrand(e) {
-    return e.target.parentElement.parentElement.remove();
+    if (e.target.parentElement.classList.contains('delete')) {
+        return e.target.parentElement.parentElement.remove();
+    }
+
 }
 
 // Remove all items
@@ -209,22 +241,18 @@ function removeAll() {
 }
 
 // Filter items
-function filterItems(e) {
-    const text = e.target.value.toLowerCase();
-    console.log(text);
+// function filterItems(e) {
+//     const text = e.target.value.toLowerCase();
 
 
-}
 
-    // document.querySelectorAll('.list-group-item').forEach(function (items) {
-    //     const item = items.firstChild.textContent;
-    //     if (item.toLowerCase().indexOf(text) !== -1) {
-    //         items.style.display = 'block';
-    //     } else {
-    //         items.style.display = 'none';
-    //     }
 
-    // });
+
+
+
+// }
+
+
 
 
 
