@@ -1,8 +1,6 @@
 // Global vars
 const form = document.querySelector('#item-form');
 const itemList = document.querySelector('#item-collection');
-const quantList = document.querySelector('#quant-collection');
-const brandList = document.querySelector('#brand-collection');
 const clearBtn = document.querySelector('#clear-items');
 const filter = document.querySelector('#filter');
 const itemInput = document.querySelector('#item');
@@ -16,15 +14,12 @@ loadEventListerners();
 function loadEventListerners() {
     // add item
     form.addEventListener('submit', addItem);
+    // remove item
     itemList.addEventListener('click', removeItem);
-    // remove quant
-    // quantList.addEventListener('click', removeQuantity);
-    // remove brand
-    // brandList.addEventListener('click', removeBrand);
-    // remove all items
+    //  remove all
     clearBtn.addEventListener('click', removeAll);
     // filter items
-    // filter.addEventListener('keyup', filterItems);
+    filter.addEventListener('keyup', filterItems);
 }
 
 // Add Item
@@ -99,10 +94,7 @@ function addItem(e) {
     // append div to ul
     itemList.appendChild(div);
 
-
-
-
-    console.log(itemList);
+    // console.log(itemList);
 
     // Clear input
     itemInput.value = '';
@@ -117,42 +109,35 @@ function addItem(e) {
 // Remove Item
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('delete')) {
-        return e.target.parentElement.parentElement.remove();
+        return e.target.parentElement.parentElement.parentElement.remove();
+
     }
 
 }
 
 
-
-// remove Quantity
-function removeQuantity(e) {
-    if (e.target.parentElement.classList.contains('delete')) {
-        return e.target.parentElement.parentElement.remove();
-    }
-}
-
-
-// remove brand
-
-function removeBrand(e) {
-    if (e.target.parentElement.classList.contains('delete')) {
-        return e.target.parentElement.parentElement.remove();
-    }
-
-}
 
 // Remove all items
 function removeAll() {
-    while (itemList.firstChild && quantList.firstChild && brandList.firstChild) {
-        console.log(itemList.removeChild(itemList.firstChild) && quantList.removeChild(quantList.firstChild) && brandList.removeChild(brandList.firstChild));
+    while (itemList.firstChild) {
+        console.log(itemList.removeChild(itemList.firstChild));
     }
 }
 
 // Filter items
-// function filterItems(e) {
-//     const text = e.target.value.toLowerCase();
+function filterItems(e) {
+    const text = e.target.value.toLowerCase();
 
-// }
+    document.querySelectorAll('.item').forEach(function (task) {
+        const item = task.firstChild.textContent;
+        if (item.toLowerCase().indexOf(text) !== -1) {
+            task.style.display = 'block';
+        } else {
+            task.style.display = 'none';
+        }
+
+    });
+}
 
 
 
