@@ -12,6 +12,8 @@ loadEventListerners();
 
 // Events
 function loadEventListerners() {
+    // DOM Load event
+    document.addEventListener('DOMContentLoaded', getItems);
     // add item
     form.addEventListener('submit', addItem);
     // remove item
@@ -22,12 +24,87 @@ function loadEventListerners() {
     filter.addEventListener('keyup', filterItems);
 }
 
+// Get items from LS
+function getItems() {
+    let items;
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    // let quants;
+    // if (localStorage.getItem('quantity') === null) {
+    //     quants = [];
+    // } else {
+    //     quants = JSON.parse(localStorage.getItem('quantity'));
+    // }
+    // let brands;
+    // if (localStorage.getItem('brands') === null) {
+    //     brands = [];
+    // } else {
+    //     brands = JSON.parse(localStorage.getItem('brands'));
+    // }
+
+    items.forEach(function (item) {
+        // create div
+        const div = document.createElement('div');
+        // create class
+        div.className = 'item';
+        // create li
+        const li = document.createElement('li');
+        // add class
+        li.className = 'list-group-item list-group-item-primary d-flex justify-content-around';
+        // append li to div
+        div.appendChild(li);
+        // create div for item
+        const divItem = document.createElement('div');
+        // append divItem to div
+        li.appendChild(divItem)
+        // append to li & create text node 
+        divItem.appendChild(document.createTextNode(item));
+        // create div for quantity
+        const divQuant = document.createElement('div');
+        // append divItem to div
+        li.appendChild(divQuant)
+        // append to li & create text node 
+        divQuant.appendChild(document.createTextNode(item));
+        // create div for brand
+        const divBrand = document.createElement('div');
+        // append divbrand to div
+        li.appendChild(divBrand)
+        // append to li & create text node 
+        divBrand.appendChild(document.createTextNode(item));
+        // create li for icons
+        const liIcon = document.createElement('li');
+        // add class to li
+        liIcon.className = 'list-group-item list-group-item-danger d-flex justify-content-around';
+        // append to div
+        div.appendChild(liIcon);
+        // create link for edit
+        const linkDel = document.createElement('a');
+        // create att for del link
+        const attDel = document.createAttribute('href');
+        // add value
+        attDel.value = '#';
+        // append att to linkDel
+        linkDel.setAttributeNode(attDel);
+        // add class for edit link
+        linkDel.className = 'delete';
+        // create delete icon
+        linkDel.innerHTML = '<i class="far fa-trash-alt"></i>';
+        // append linkDel to liIcon
+        liIcon.appendChild(linkDel);
+        // append div to ul
+        itemList.appendChild(div);
+    })
+
+}
+
 // Add Item
 function addItem(e) {
     if (itemInput.value === '' && quantInput.value === '' && brandInput.value === '') {
         alert('Place an item in!')
     }
-
 
     // create div
     const div = document.createElement('div');
@@ -63,20 +140,6 @@ function addItem(e) {
     liIcon.className = 'list-group-item list-group-item-danger d-flex justify-content-around';
     // append to div
     div.appendChild(liIcon);
-    // create link for delete icon
-    const linkEd = document.createElement('a');
-    // create att 
-    const attEd = document.createAttribute('href');
-    // add value
-    attEd.value = '#';
-    // append att to link
-    linkEd.setAttributeNode(attEd);
-    // add a class for linkDel
-    linkEd.className = 'edit';
-    // add icon
-    linkEd.innerHTML = '<i class="far fa-edit"></i>';
-    // append link to li
-    liIcon.appendChild(linkEd)
     // create link for edit
     const linkDel = document.createElement('a');
     // create att for del link
@@ -96,6 +159,12 @@ function addItem(e) {
 
     // console.log(itemList);
 
+
+    // Store in LS
+    storeItemInLocalStorage(itemInput.value);
+    storeItemInLocalStorage(quantInput.value);
+    storeItemInLocalStorage(brandInput.value);
+
     // Clear input
     itemInput.value = '';
     quantInput.value = '';
@@ -104,6 +173,21 @@ function addItem(e) {
 
     e.preventDefault();
 
+}
+
+
+// Store item function
+function storeItemInLocalStorage(item) {
+    let items;
+    if (localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+
+    items.push(item);
+
+    localStorage.setItem('items', JSON.stringify(items));
 }
 
 // Remove Item
@@ -130,7 +214,7 @@ function filterItems(e) {
 
     document.querySelectorAll('.item').forEach(function (task) {
         const item = task.firstChild.textContent;
-        if (item.toLowerCase().indexOf(text) !== -1) {
+        if (item.toLowerCase().indexOf(text) != -1) {
             task.style.display = 'block';
         } else {
             task.style.display = 'none';
