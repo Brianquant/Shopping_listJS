@@ -26,24 +26,16 @@ function loadEventListerners() {
 
 // Get items from LS
 function getItems() {
+
+
     let items;
     if (localStorage.getItem('items') === null) {
         items = [];
+        console.log(items);
     } else {
         items = JSON.parse(localStorage.getItem('items'));
     }
-    // let quants;
-    // if (localStorage.getItem('quantity') === null) {
-    //     quants = [];
-    // } else {
-    //     quants = JSON.parse(localStorage.getItem('quantity'));
-    // }
-    // let brands;
-    // if (localStorage.getItem('brands') === null) {
-    //     brands = [];
-    // } else {
-    //     brands = JSON.parse(localStorage.getItem('brands'));
-    // }
+
 
     items.forEach(function (item) {
         // create div
@@ -96,6 +88,8 @@ function getItems() {
         liIcon.appendChild(linkDel);
         // append div to ul
         itemList.appendChild(div);
+
+
     })
 
 }
@@ -181,13 +175,15 @@ function storeItemInLocalStorage(item) {
     let items;
     if (localStorage.getItem('items') === null) {
         items = [];
+
     } else {
         items = JSON.parse(localStorage.getItem('items'));
     }
-
     items.push(item);
 
     localStorage.setItem('items', JSON.stringify(items));
+
+
 }
 
 // Remove Item
